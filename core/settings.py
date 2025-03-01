@@ -35,14 +35,28 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     'rest_framework',
     'channels',
+    'ckeditor',
+    'ckeditor_uploader',
     
 ]
 
 PROJECT_APPS = [
+    'apps.blog',
     
 ]
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS+ THIRD_PARTY_APPS
+
+
+CKEDITOR_UPLOAD_PATH = "media/"
+CKEDITOR_CONFIGS = {
+    "default": {
+        "toolbar": "full",
+        "autoParagraph": False
+    }
+}
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -127,6 +141,9 @@ USE_TZ = True
 STATIC_LOCATION='static'
 STATIC_URL = 'static/'
 STATIC_ROOT=os.path.join(BASE_DIR,"static")
+
+MEDIA_URL='media/'
+MEDIA_ROOT=os.path.join(BASE_DIR,"media")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
