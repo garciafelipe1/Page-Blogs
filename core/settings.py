@@ -196,4 +196,7 @@ CELERY_BROKER_TRANSPORT_OPTIONS = {
 CELERY_RESULT_BACKEND = 'django-db'
 CELERY_CACHE_BACKEND = 'default'
 
-CELERY_IMPORTS = ('core.tasks',)
+CELERY_IMPORTS = (
+    'core.tasks',
+    'apps.blog.tasks'
+)

@@ -9,7 +9,7 @@ from rest_framework.exceptions import NotFound,APIException
 from .serializers import PostListSerializer,PostSerializer,HeadingSerializer,PostView
 from .models import Post,Heading,PostAnalytics
 from .utils import get_client_ip
-
+from .tasks import increment_post_impressions
 
 
 
@@ -22,6 +22,12 @@ class PostListView(APIView):
                 raise NotFound(detail="No posts found")
             
             serialized_posts = PostListSerializer(posts,many=True).data
+            
+            for post in posts:
+                increment_post_impressions.delay(post.id)
+                
+            
+            
         except Post.DoesNotExist:
             raise NotFound(detail=f"No posts found ")
         except Exception as e:
